@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<rootDir>C://ftp</rootDir>
+	<users>
+		<user>
+			<username>user</username>
+			<password>12345</password>
+		</user>
+		<user>
+			<username>user</username>
+			<password>12345</password>
+		</user>
+		<user>
+			<username>sisi</username>
+			<password>12345</password>
+		</user>
+	</users>
+</server>
