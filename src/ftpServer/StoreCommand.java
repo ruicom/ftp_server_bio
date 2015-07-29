@@ -10,6 +10,10 @@ import java.net.Socket;
 
 public class StoreCommand implements Command{
 
+    /**
+     * ftp协议store命令的实现
+     * 功能：开启数据连接，主动发起tcp连接，接受“客户端”发送的数据流，存储到服务器磁盘。
+     * */	
 	@Override
 	public void getResult(String data, Writer writer, ControllerThread t) {
 			try{ 
@@ -23,7 +27,7 @@ public class StoreCommand implements Command{
 				= tempSocket.getInputStream(); 
 				byte byteBuffer[] = new byte[1024]; 
 				int amount; 
-				//这里又会阻塞掉，无法从客户端输出流里面获取数据？是因为客户端没有发送数据么
+				
 				while((amount =inSocket.read(byteBuffer) )!= -1){ 
 					inFile.write(byteBuffer, 0, amount); 
 				} 

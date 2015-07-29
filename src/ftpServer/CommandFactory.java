@@ -1,7 +1,15 @@
 package ftpServer;
 
+/**
+ * 命令工厂
+ * */
 public class CommandFactory {
 
+	/**
+	 * 根据客户端传送过来的命令生成相应的命令处理对象
+	 * @param 客户端传送过来的对象。
+	 * @return Command 根据命令类型生成的命令处理对象。
+	 * */
 	public static Command createCommand(String type) {
 		
 		type = type.toUpperCase();

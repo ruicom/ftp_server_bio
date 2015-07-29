@@ -9,6 +9,10 @@ import java.io.Writer;
  * */
 public class CwdCommand implements Command{
 
+	/**
+	 * cwd处理程序
+	 * 功能：修改服务器当前访问的目录
+	 * */
 	@Override
 	public void getResult(String data, Writer writer, ControllerThread t) {
 		String dir = t.getNowDir() +File.separator+data;

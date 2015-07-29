@@ -8,7 +8,8 @@ import java.util.Map;
 public class UserCommand implements Command{
 	
 	/**
-	 * 检验是否有这个用户名存在
+	 * ftp user命令的实现
+	 * 功能：检验是否有这个用户名存在
 	 * */
 	@Override
 	public void getResult(String data,Writer writer,ControllerThread t) {

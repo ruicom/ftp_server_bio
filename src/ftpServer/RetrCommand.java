@@ -13,10 +13,14 @@ import java.io.Writer;
 import java.net.Socket;
 
 /**
- * 处理文件的发送
+ * 处理文件的下载
  * */
 public class RetrCommand implements Command{
-
+    
+	/**
+	 * ftp retr命令的实现
+	 * 功能：在port命令之后执行，开启数据连接，将服务器的数据传送到客户端 
+	 * */
 	@Override
 	public void getResult(String data, Writer writer, ControllerThread t) {
 		Socket s;

@@ -4,12 +4,22 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * ftp服务器入口
+ * 功能：1、初始化全局信息
+ *     2、开启serverSocket监听相应断开
+ *     3、创建控制连接处理线程
+ * */
 public class FtpServer {
 	
 	private int port;
 	
 	ServerSocket serverSocket;
 	
+	/**
+	 * 创建ServerSocket，初始化全局信息
+	 * @param port    端口号
+	 **/
 	public FtpServer(int port) throws IOException {
 		 
 		serverSocket = new ServerSocket(port);
@@ -17,6 +27,10 @@ public class FtpServer {
 		  Share.init();
 	}
 	
+
+	/**
+	 * 进入tcp listend阶段，等待相应的连接请求
+	 * */
 	public void listen() throws IOException {
 		 
 		  Socket socket = null;

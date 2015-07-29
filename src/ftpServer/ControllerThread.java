@@ -79,9 +79,15 @@ public class ControllerThread extends Thread{
 		this.socket = socket; 
 	}
 
-	
+	/**
+	 * 控制连接的流程
+	 * 功能：
+	 * 1、从输入流里面获取客户端传送过来的数据
+	 * 2、根据客户端传送过来的命令从命令工厂获得相应的命令处理对象
+	 * 3、进行命令的处理
+	 * 
+	 * */
 	public void run() {
-		 System.out.println("hello");
 		 BufferedReader reader;
 		try {
 			  reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));	
@@ -141,7 +147,11 @@ public class ControllerThread extends Thread{
 	     
 	}
 	
-	
+	/**
+	 * 进行简单的登录验证 
+	 * 功能： 登录验证,在没有登录的情况下，无法使用除了user,pass之外的命令
+	 * @param command 即将要执行的命令
+	 * */
 	public  boolean loginValiate(Command command) {
 		if(command instanceof UserCommand || command instanceof PassCommand) {
 			return true;

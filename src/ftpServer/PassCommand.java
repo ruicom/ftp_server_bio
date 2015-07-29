@@ -5,6 +5,9 @@ import java.io.Writer;
 
 public class PassCommand implements Command{
 	
+	/**
+     *ftp协议pass命令的实现
+	 * */
 	@Override
 	public void getResult(String data, Writer writer,ControllerThread t) {
 		

@@ -5,6 +5,9 @@ import java.io.Writer;
 
 public class QuitCommand implements Command{
 
+	/**
+	 * ftpĞ­ÒéquitÃüÁî
+	 * */
 	@Override
 	public void getResult(String data, Writer writer, ControllerThread t) {
 		

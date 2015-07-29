@@ -12,6 +12,7 @@ public class DirCommand implements Command{
 
 	/**
 	 * 获取ftp目录里面的文件列表
+	 * 
 	 * */
 	@Override
 	public void getResult(String data, Writer writer,ControllerThread t) {
