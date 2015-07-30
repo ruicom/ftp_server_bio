@@ -37,7 +37,7 @@ public class ControllerThread extends Thread{
 	//当前目录
 	private String nowDir = Share.rootDir;
 	
-	
+
 	
 	public String getNowDir() {
 		return nowDir;
@@ -88,17 +88,17 @@ public class ControllerThread extends Thread{
 	 * 
 	 * */
 	public void run() {
-		 BufferedReader reader;
+		BufferedReader reader;	 
+		StringBuilder response = null;
 		try {
 			  reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));	
-			  Writer writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			  
 			  while(true) {
+				  response =  new StringBuilder();
 				  //第一次访问，输入流里面是没有东西的，所以会阻塞住
 				  if(count == 0) 
 				  {
-					  writer.write("220");
-					  writer.write("\r\n");
-					  writer.flush();
+					  response.append("220");
 				      count++;
 				  }
 				  else {
@@ -113,7 +113,7 @@ public class ControllerThread extends Thread{
 						      if(loginValiate(commandSolver)) {
 							      if(commandSolver == null)
 							      {
-							    	  writer.write("502  该命令不存在，请重新输入");
+							    	  response.append("502  该命令不存在，请重新输入");
 							      }
 							      else 
 							      {
@@ -121,13 +121,13 @@ public class ControllerThread extends Thread{
 								      if(datas.length >=2) {
 								    	  data = datas[1];
 								      }
-								      commandSolver.getResult(data, writer,this);
+								      response.append(commandSolver.getResult(data,this));
 							      }
 						      }
 						      else 
 						      {
-						    	  writer.write("532 执行该命令需要登录，请登录后再执行相应的操作\r\n");
-						    	  writer.flush();
+						    	  response.append("532 执行该命令需要登录，请登录后再执行相应的操作\r\n");
+						    	  
 						      }
 						  }   	
 					  }
@@ -136,6 +136,8 @@ public class ControllerThread extends Thread{
 						  break;
 					  }
 				  }
+				  FtpWriter ftpWriter = new FtpWriter(socket.getOutputStream());
+				  ftpWriter.sendResponse(response.toString()); 
 			  }
 		    
 		} catch (IOException e) {

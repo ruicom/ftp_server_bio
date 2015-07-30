@@ -9,6 +9,6 @@ interface Command {
 	 * @param writer  网络输出流
 	 * @param t       控制连接所对应的处理线程
 	 * */
-	public void getResult(String data,Writer writer,ControllerThread t);
+	public String getResult(String dat,ControllerThread t);
 	
 }

@@ -22,7 +22,8 @@ public class RetrCommand implements Command{
 	 * 功能：在port命令之后执行，开启数据连接，将服务器的数据传送到客户端 
 	 * */
 	@Override
-	public void getResult(String data, Writer writer, ControllerThread t) {
+	public String getResult(String data,ControllerThread t) {
+		String response = "";
 		Socket s;
 		String desDir = t.getNowDir()+File.separator+data;
 		File file = new File(desDir);
@@ -30,7 +31,8 @@ public class RetrCommand implements Command{
 		if(file.exists())
 		{
 			try {
-				 writer.write("150 open ascii mode...\r\n");
+				 Writer writer = new BufferedWriter(new OutputStreamWriter(t.getSocket().getOutputStream()));
+				 writer.write("150 Binary data connection\r\n"); 
 				 writer.flush();
 				 s = new Socket(t.getDataIp(), Integer.parseInt(t.getDataPort()));
 				 BufferedOutputStream dataOut = new BufferedOutputStream(s.getOutputStream());
@@ -41,20 +43,17 @@ public class RetrCommand implements Command{
 				 }
 				 dataOut.flush();
 				 s.close();
-				 writer.write("220 transfer complete...\r\n");
-				 writer.flush();
+				response = "220 transfer complete...";
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		else {
-			try {
-				writer.write("220  该文件不存在\r\n");
-				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		
+			response = "220  该文件不存在";
 		}
+		return response;
 	}
 
 }

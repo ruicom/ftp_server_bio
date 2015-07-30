@@ -12,24 +12,17 @@ public class PortCommand implements Command{
 	 *     要进行运算生成端口号：12*256+8。端口号用16为表示，12是高8位，8是低8位。
 	 * */
 	@Override
-	public void getResult(String data, Writer writer,ControllerThread t) {
+	public String getResult(String data,ControllerThread t) {
 		String response = "200 the port an ip have been transfered";
-		try {
-			
-			String[] iAp =  data.split(",");
-			String ip = iAp[0]+"."+iAp[1]+"."+iAp[2]+"."+iAp[3];
-			String port = Integer.toString(256*Integer.parseInt(iAp[4])+Integer.parseInt(iAp[5]));
-			System.out.println("ip is "+ip);
-			System.out.println("port is "+port);
-			t.setDataIp(ip);
-			t.setDataPort(port);
-			writer.write(response);
-			writer.write("\r\n");
-			writer.flush();
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
+		String[] iAp =  data.split(",");
+		String ip = iAp[0]+"."+iAp[1]+"."+iAp[2]+"."+iAp[3];
+		String port = Integer.toString(256*Integer.parseInt(iAp[4])+Integer.parseInt(iAp[5]));
+		System.out.println("ip is "+ip);
+		System.out.println("port is "+port);
+		t.setDataIp(ip);
+		t.setDataPort(port);
+		return response;
+		
 	}
 
 }

@@ -12,7 +12,7 @@ public class UserCommand implements Command{
 	 * 功能：检验是否有这个用户名存在
 	 * */
 	@Override
-	public void getResult(String data,Writer writer,ControllerThread t) {
+	public String getResult(String data,ControllerThread t) {
 		String response = "";
 		if(Share.users.containsKey(data)) {
 			ControllerThread.USER.set(data);
@@ -21,16 +21,8 @@ public class UserCommand implements Command{
 		else {
 			response = "501";
 		}
-		
-		try {
-			writer.write(response);
-			writer.write("\r\n");
-			writer.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
+		return response;
+	 
 	}
 
 }

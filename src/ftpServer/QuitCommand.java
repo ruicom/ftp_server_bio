@@ -9,16 +9,16 @@ public class QuitCommand implements Command{
 	 * ftp–≠“Èquit√¸¡Ó
 	 * */
 	@Override
-	public void getResult(String data, Writer writer, ControllerThread t) {
-		
-		try {
-			writer.write("221 goodbye.\r\n");
-			writer.flush();
-			writer.close();
-			t.getSocket().close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public String getResult(String data, ControllerThread t) {
+	
+			try {
+				t.getSocket().close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "221 goodbye.";
 	}
+	
 
 }

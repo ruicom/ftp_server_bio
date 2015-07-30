@@ -9,7 +9,7 @@ public class PassCommand implements Command{
      *ftpĞ­ÒépassÃüÁîµÄÊµÏÖ
 	 * */
 	@Override
-	public void getResult(String data, Writer writer,ControllerThread t) {
+	public String getResult(String data,ControllerThread t) {
 		
 		System.out.println("execute the pass command");
 		System.out.println("the data is "+data);
@@ -28,14 +28,7 @@ public class PassCommand implements Command{
 			System.out.println("µÇÂ¼Ê§°Ü£¬ÃÜÂë´íÎó");
 			response = "530   ÃÜÂë´íÎó";
 		}
-		try {
-			writer.write(response);
-			writer.write("\r\n");
-			writer.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return response;
 		
 	}
 

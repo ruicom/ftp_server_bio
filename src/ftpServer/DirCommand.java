@@ -15,17 +15,15 @@ public class DirCommand implements Command{
 	 * 
 	 * */
 	@Override
-	public void getResult(String data, Writer writer,ControllerThread t) {
+	public String getResult(String data,ControllerThread t) {
+		String response = "";
 		String desDir = t.getNowDir()+data;
 		System.out.println(desDir);
 		File dir = new File(desDir);
 		if(!dir.exists()) {
-			try {
-				writer.write("210  文件目录不存在\r\n");
-				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		
+			response = "210  文件目录不存在";
+		
 		}
 		else 
 		{
@@ -52,17 +50,18 @@ public class DirCommand implements Command{
 			}
 			
 			//开启数据连接，将数据发送给客户端，这里需要有端口号和ip地址
-			 Socket s;
+			Socket s;
 			try {
-				 writer.write("150 open ascii mode...\r\n");
+				 Writer writer = new BufferedWriter(new OutputStreamWriter(t.getSocket().getOutputStream()));
+				 response = "150 open ascii mode...\r\n";
+				 writer.write(response);
 				 writer.flush();
 				 s = new Socket(t.getDataIp(), Integer.parseInt(t.getDataPort()));
 				 BufferedWriter dataWriter = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
 				 dataWriter.write(dirs.toString());
 				 dataWriter.flush();
 				 s.close();
-				 writer.write("220 transfer complete...\r\n");
-				 writer.flush();
+				 response = "220 transfer complete...\r\n";
 			} catch (NumberFormatException e) {
 				
 				e.printStackTrace();
@@ -74,7 +73,8 @@ public class DirCommand implements Command{
 				e.printStackTrace();
 			}
 		}
-		
+		return response;
 	}
+	
 
 }
